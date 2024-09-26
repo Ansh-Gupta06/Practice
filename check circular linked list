@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+bool circularLL(Node* head)
+{
+    Node* temp = head;
+	if(head == NULL)
+	{
+		return true;
+	}
+	do
+	{
+		temp = temp -> next;
+	}while((temp!=NULL)&&(temp!=head));
+	if(temp == head)
+	return true;
+	else 
+	return false;
+}
+//run on code360
