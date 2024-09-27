@@ -1,0 +1,108 @@
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+class node
+{
+    public:
+    int data;
+    node* next;
+    node(int data)
+    {
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+void insert(node* &head,int data)
+{
+    node* newly = new node(data);
+    while(head == NULL)
+    {
+        head = newly;
+        return;
+    }
+    node* temp = head;
+    while(temp -> next != NULL)
+    {
+        temp =temp -> next;
+    }
+    temp -> next = newly;
+}
+void print(node* &head)
+{
+    node* temp = head;
+    while(temp != NULL )
+    {
+        cout<<temp -> data<<" ";
+        temp = temp -> next;
+    }
+    cout<<endl;
+}
+
+//vector
+void convert_vector(node* &head,vector<int> &arr)
+{
+    node* temp = head;
+    while(temp!=NULL)
+    {
+        arr.push_back((temp->data));
+        temp = temp->next;
+    }
+}
+bool ispalindrome(vector<int> arr)
+{
+    int size = arr.size();
+    for(int i = 0;i<size;i++)
+    {
+        if(arr[i]!=arr[size-1-i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//string
+void convert_string(node* &head,string &str)
+{
+    node* temp = head;
+    while(temp!=NULL)
+    {
+        str = str + to_string(temp->data);
+        temp = temp->next;
+    }
+}
+bool ispalindrome(string str)
+{
+    int size = str.size();
+    for(int i = 0;i<size;i++)
+    {
+        if(str[i]!=str[size-1-i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+int main()
+{
+    node* head = NULL;
+    insert(head,1);
+    insert(head,1);
+    insert(head,2);
+    insert(head,4);
+    insert(head,1);
+    insert(head,1);
+    cout<<"List..."<<endl;
+    print(head);
+
+    vector<int> arr;
+    convert_vector(head,arr);
+    bool ans = ispalindrome(arr);
+    cout<<"is palindrome "<<ans<<endl;
+
+    string str="";
+    convert_string(head,str);
+    ans = ispalindrome(str);
+    cout<<"is palindrome "<<ans<<endl;
+    return 0;
+}
