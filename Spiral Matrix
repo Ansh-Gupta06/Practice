@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+#include<vector>
+
+    int main() 
+    {
+        vector<vector<int>> matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        vector<int> ans;
+        int row = matrix.size();
+        int column = matrix[0].size();
+
+        int startrow = 0;
+        int endrow = row-1;
+        int startcolumn = 0;
+        int endcolumn = column-1;
+        int total = row*column;
+        int count = 0;
+
+        while(count<total)
+        {
+            //1st row
+            for(int i = startcolumn;count<total&&i<=endcolumn;i++)
+            {
+                ans.push_back(matrix[startrow][i]);
+                count++;
+            }
+            startrow++;
+            
+            //1st column
+            for(int i = startrow;count<total&&i<=endrow;i++)
+            {
+                ans.push_back(matrix[i][endcolumn]);
+                count++;
+            }
+            endcolumn--;
+
+            //last row
+            for(int i = endcolumn;count<total&&i>=startcolumn;i--)
+            {
+                ans.push_back(matrix[endrow][i]);
+                count++;
+            }
+            endrow--;
+
+            //1stcolumn
+            for(int i = endrow;count<total&&i>=startrow;i--)
+            {
+                ans.push_back(matrix[i][startcolumn]);
+                count++;
+            }
+            startcolumn++;
+           // count++;
+        }
+        for(int i = 0;i<ans.size();i++)
+        {
+            if(i%3==0)
+            cout<<endl;
+            cout<<ans[i]<<" ";
+        }
+        return 0;
+
+    }
