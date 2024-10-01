@@ -1,0 +1,70 @@
+#include <bits/stdc++.h> 
+class TwoStack {
+
+public:
+
+    int *arr;
+    int s;
+    int top1;
+    int top2;
+    TwoStack(int s) {
+        this -> s = s;
+        arr = new int[s];
+        top1 = -1;
+        top2 = s;
+    }
+    
+    // Push in stack 1.
+    void push1(int num) {
+        if(top2 - top1 >1)
+        {
+            top1++;
+            arr[top1] = num;
+        }
+        // else
+        // cout<<"Overflow"<<endl;
+    }
+
+    // Push in stack 2.
+    void push2(int num) {
+        if(top2 - top1 >1)
+        {
+            top2--;
+            arr[top2] = num;
+        }
+        // else
+        // cout<<"overflow..."<<endl;
+    }
+
+    // Pop from stack 1 and return popped element.
+    int pop1() {
+        if(top1 != -1)
+        {
+            int ele = arr[top1];
+            top1--;
+            return ele;
+        }
+        else
+        {
+           // cout << "Underflow..." << endl;
+            return -1;
+        }
+    }
+
+    // Pop from stack 2 and return popped element.
+    int pop2() {
+        if(top2 != s)
+        {
+            int ele = arr[top2];
+            top2++;
+            return ele;
+        } 
+        else 
+        {
+            //cout << "Underflow..." << endl;
+            return -1;
+        }
+    }
+};
+
+//main design karlo--------object.push1(5) or object.push2(6)
