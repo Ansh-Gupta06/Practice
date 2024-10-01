@@ -1,0 +1,102 @@
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<bits/stdc++.h>
+class node
+{
+public:
+    int data;
+    node* next;
+    node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+};
+void createlist(node* &head,int data)
+{
+    node* newly = new node(data);
+    while(head == NULL)
+    {
+        head = newly;
+        return;
+    }
+    node* temp = head;
+    while(temp -> next != NULL)
+    {
+        temp =temp -> next;
+    }
+    temp -> next = newly;
+}
+void print(node* &head)
+{
+    node* temp = head;
+    while(temp != NULL )
+    {
+        cout<<temp -> data<<" ";
+        temp = temp -> next;
+    }
+    cout<<endl;
+}
+
+void insertat(node* &head,node* &tail,int data)
+{
+    node* newly = new node(data);
+    if(head == NULL)
+    {
+        head = newly;
+        tail = head;
+        return;
+    }
+    tail -> next = newly;
+    tail = newly;
+}
+
+
+node* sortList(node *head){
+    node* zerohead = NULL;
+    node* zerotail = NULL;
+    node* onehead = NULL;
+    node* onetail = NULL;
+    node* twohead = NULL;
+    node* twotail = NULL;
+    node* temp = head;
+    while(temp!=NULL)
+    {
+        if(temp->data==0)
+        {
+            insertat(zerohead,zerotail,0);
+        }
+        else if(temp->data==1)
+        {
+            insertat(onehead,onetail,1);
+        }
+        else if(temp->data==2)
+        {
+            insertat(twohead,twotail,2);
+        }
+        temp = temp -> next;
+    }
+    zerotail->next = onehead;
+    onetail->next = twohead;
+    twotail->next = NULL;
+    head = zerohead;
+    return head;
+}
+
+int main()
+{
+    node* head = NULL;
+    createlist(head,0); 
+    createlist(head,1);
+    createlist(head,0);
+    createlist(head,2);
+    createlist(head,2);
+    createlist(head,1);
+    createlist(head,0);
+    cout<<"Lists 1..."<<endl;
+    print(head);
+    head = sortList(head);
+    print(head);
+    return 0;
+}
