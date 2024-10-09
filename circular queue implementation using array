@@ -1,0 +1,113 @@
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+class circularqueue
+{
+    public:
+    int* arr;
+    int size;
+    int qrear;
+    int qfront;
+
+    circularqueue(int size)
+    {
+        this->size = size;
+        arr = new int[size];
+        qfront=-1;
+        qrear=-1;
+    }
+
+    void enqueue(int element)
+    {
+        if((qrear+1)%size==qfront)
+        {
+            cout<<"Overflow condition"<<endl;
+            return;
+        }
+        else if(qfront==-1 && qrear==-1)
+        {
+            qfront=qrear=0;
+            arr[qrear]=element;
+        }
+        else
+        {
+            qrear=(qrear+1)%size;
+            arr[qrear]=element;
+        }
+    }
+
+    void dequeue()
+    {
+        if(qfront==-1 && qrear==-1)
+        {
+            cout<<"Underflow condition"<<endl;
+        }
+        else if(qfront==qrear)
+        {
+            cout<<"Deleted element is "<<arr[qfront]<<endl;
+            qfront = -1;
+            qrear = -1;
+        }
+        else
+        {
+            cout<<"Deleted element is "<<arr[qfront]<<endl;
+            qfront = (qfront+1)%size;
+        }
+    }
+
+    void front()
+    {
+        if(qfront==-1 && qrear==-1)
+        {
+            cout<<"Underdflow condition"<<endl;
+            return;
+        }
+        cout<<"Element is "<<arr[qfront]<<endl;
+    }
+
+    void display()
+    {
+        if(qfront==-1 && qrear==-1)
+        {
+            cout<<"Underflow condition"<<endl;
+            return;
+        }
+        cout<<"Elements are ";
+        for(int i=qfront;i!=qrear;i=(i+1)%size)
+        {
+            cout<<arr[i]<<" ";
+        }
+        //last element bach rha hai isliye alag se print karna pad rha hai agr condn qrear+1 karoge toh circularly fas jaoge
+        cout<<arr[qrear]<<endl;
+    }
+};
+int main()
+{
+    int size = 5;
+    circularqueue cq(size);
+    cq.front();
+    cq.display();
+    cq.dequeue();
+    cq.enqueue(5);
+    cq.enqueue(6);
+    cq.display();
+    cq.front();
+    cq.enqueue(7);
+    cq.enqueue(8);
+    cq.enqueue(9);
+    cq.enqueue(0);
+    cq.display();
+    cq.dequeue();
+    cq.front();
+    cq.display();
+    cq.dequeue();
+    cq.enqueue(1);
+    cq.display();
+    cq.dequeue();
+    cq.dequeue();
+    cq.dequeue();
+    cq.dequeue();
+    cq.display();
+    cq.dequeue();
+    return 0;
+}
