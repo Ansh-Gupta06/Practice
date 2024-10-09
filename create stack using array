@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+class Stack
+{
+    public:
+    int *arr;
+    int size;
+    int top;
+    Stack(int size)
+    {
+        this -> size = size;
+        arr = new int[size];
+        top = -1;
+    }
+    void push(int element)
+    {
+        if(top != size-1)                                                       //condition -> size - top > 1
+        { 
+            top++;
+            arr[top] = element;
+        }   
+        else
+        cout<<"Overflow..."<<endl;                                   
+    }
+    void pop()
+    {
+        if(top != -1)
+        {
+            cout<<"Toped element = "<<arr[top]<<endl;
+            top--;
+        }
+        else 
+        cout<<"Underflow"<<endl;
+    }
+    void peak()
+    {
+        cout<<"Peak Element = "<<arr[top]<<endl;
+    }
+};
+int main()
+{
+    int size = 5;
+    Stack s(size);
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+    s.push(6);
+    s.push(7);
+    s.peak();
+    s.pop();
+    s.peak();
+    return 0;
+}
