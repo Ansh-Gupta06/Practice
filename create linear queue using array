@@ -1,0 +1,103 @@
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+class Queue
+{
+public:
+    int* arr;
+    int size;
+    int qfront;
+    int qrear;
+    Queue(int size)
+    {
+        this -> size = size;
+        arr = new int[size];
+        qfront = -1;
+        qrear = -1;
+    }
+
+    void enqueue(int element)
+    {
+        //when queue is full
+        if(qrear == size-1)
+        {
+            cout<<"Overflow"<<endl;
+            return;
+        }
+        //when queue is empty
+        else if(qrear==-1 && qfront==-1)
+        {
+            qrear=qfront=0;
+            arr[qrear]=element;
+        }
+        //normal intitalization
+        else
+        {
+            qrear++;
+            arr[qrear] = element;
+        }
+    }
+
+    void dequeue()
+    {
+        if(qrear==-1 && qfront==-1)
+        {
+            cout<<"Underdlow"<<endl;
+        }
+        else if(qfront==qrear)
+        {
+            cout<<"deleted element is "<<arr[qfront]<<endl;
+            qrear = -1;
+            qfront = -1;
+        }
+        else
+        {
+            cout<<"Deleted element is "<<arr[qfront]<<endl;
+            qfront++;
+        }
+    }
+
+    void front()
+    {
+        if(qfront==-1 && qrear==-1)
+        {
+            cout<<"Underflow"<<endl;
+            return;
+        }
+        cout<<"Element is "<<arr[qfront]<<endl;
+    }
+    
+    void display()
+    {
+        if(qfront==-1 && qrear==-1)
+        {
+            cout<<"Underflow"<<endl;
+            return;
+        }
+        cout<<"Elements are ";
+        for(int i=qfront;i<=qrear;i++)        //imp point to note ( <= )
+        {
+            cout<<arr[i]<<" ";
+        }
+    }
+};
+int main()
+{
+    int size = 5;
+    Queue q(size);
+    q.dequeue();
+    q.display();
+    q.front();
+    q.enqueue(6);
+    q.enqueue(5);
+    q.enqueue(4);
+    q.enqueue(3);
+    q.enqueue(8);
+    q.enqueue(1);
+    q.enqueue(6);
+    q.front();
+    q.dequeue();
+    q.front();
+    q.display();
+    return 0;
+}
