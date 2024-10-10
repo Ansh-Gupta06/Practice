@@ -2,6 +2,11 @@
 #include<iostream>
 using namespace std;
 
+//((front==0 && rear==size-1) || rear+1 == front) iski jagah (rear+1%size)==front
+//push from rear same as circular queue
+//pop from font same as circular queue
+//but learn new condition that are written down in order to maintain similarities in all conditions
+
 
 #define element x
 class Deque
