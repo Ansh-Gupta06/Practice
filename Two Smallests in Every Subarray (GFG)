@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    int pairWithMaxSum(vector<int>& arr) {
+        if(arr.size()<=1)
+        return -1;
+        int maxi = INT_MIN;
+        int sum = 0;
+        sum = arr[0]+arr[1];
+        maxi = sum;
+        for(int i=2;i<=arr.size()-2+1;i++)
+        {
+            sum = sum - arr[i-2] + arr[i];
+            maxi = max(maxi,sum);
+        }
+        return maxi;
+        
+    }
+};
