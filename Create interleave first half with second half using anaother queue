@@ -1,0 +1,41 @@
+//it is not for odd size
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+#include<queue>
+int main()
+{
+    queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+    q.push(6);
+    q.push(7);
+    q.push(8);
+
+    queue<int> nq;
+    int n = q.size()/2;
+    for(int i=0;i<n;i++)
+    {
+        int value = q.front();
+        nq.push(value);
+        q.pop();
+    }
+    while(!nq.empty())
+    {
+        int value = nq.front();
+        nq.pop();
+        q.push(value);
+        int data = q.front();
+        q.pop();
+        q.push(data);  
+    }
+    while(!q.empty())
+    {
+        cout<<q.front()<<" ";
+        q.pop();
+    }
+    return 0;
+}
