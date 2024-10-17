@@ -1,0 +1,54 @@
+//run karo toh samajh ayega matlab logic samajh lo apne aap aa jayega
+
+#include<iostream>
+using namespace std;
+#include<queue>
+#include<stack>
+int main()
+{
+    queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+    q.push(6);
+    q.push(7);
+    q.push(8);
+    stack<int> s;
+    int size = q.size();
+    for(int i=0;i<size/2;i++)
+    {
+        s.push(q.front());
+        q.pop();
+    }
+    //kul milake stack reverse karna queue ko socho usmein kaise run karte program
+    while(!s.empty())
+    {
+        q.push(s.top());
+        s.pop();
+    }
+    for(int i=0;i<size/2;i++)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+    for(int i=0;i<size/2;i++)
+    {
+        s.push(q.front());
+        q.pop();
+    }
+    while(!s.empty())
+    {
+        q.push(s.top());
+        s.pop();
+        q.push(q.front());
+        q.pop();
+    }
+    while(!q.empty())
+    {
+        cout<<q.front()<<" ";
+        q.pop();
+    }
+    return 0;
+}
