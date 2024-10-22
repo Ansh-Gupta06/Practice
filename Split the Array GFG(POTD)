@@ -1,0 +1,35 @@
+//nC0 + nC1 +.....nCn wala concept  kuch repeat bhi ho rhe
+class Solution {
+  public:
+   int power(int base,int a){
+    int res=1,mod=pow(10,9)+7;
+    while(a>0){
+        if(a&1){              ////odd ke saath & karne par 1 ata hai and even ke saath 0
+            res=(res%mod) * (base%mod);
+            res%=mod;
+        }
+        base=(base%mod) * (base%mod);
+        base%=mod;
+        a=a/2;
+    }
+    return res;
+}
+
+
+    int countgroup(vector<int>& arr) {
+        int Xor=0;
+        int ans;
+        for(int i=0;i<arr.size();i++)
+        {
+            Xor = Xor^arr[i];
+        }
+        if(Xor==0)
+        {
+            ans=power(2,arr.size()-1)-1;
+            return ans;
+
+        }
+        else
+        return 0;
+    }
+};
