@@ -1,0 +1,42 @@
+
+class Solution {
+  public:
+    vector<int> countDistinct(vector<int> &arr, int k) {
+        vector<int> ans;
+        map<int,int> mp;
+        int count=0;
+        //first k traversing
+        for(int i=0;i<k;i++)
+        {
+            if(mp.find(arr[i]) == mp.end())
+            {
+                count++;
+                mp[arr[i]] = 1;
+            }
+            else
+            mp[arr[i]] = mp[arr[i]] + 1; 
+        }
+        ans.push_back(count);
+        for(int i = k;i<arr.size();i++)
+        {
+            if(mp.find(arr[i]) == mp.end())
+            {
+                count++;
+                mp[arr[i]] = 1;
+            }
+            else
+            mp[arr[i]] = mp[arr[i]] + 1;
+            
+            if(mp[arr[i-k]]<=1)
+            {
+                mp.erase(arr[i-k]); 
+                count--;
+            }
+            else
+            mp[arr[i-k]] = mp[arr[i-k]] -1;
+            
+            ans.push_back(count);
+        }
+        return ans;
+    }
+};
