@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    vector<int> productExceptSelf(vector<int>& arr) {
+        
+        int size = arr.size();
+        
+        vector<int> presum(size);
+        presum[0] = 1;
+        for(int i=1;i<size;i++)
+        {
+            presum[i] = presum[i-1]*arr[i-1];
+        }
+        
+        vector<int> postsum(size);
+        postsum[size-1] = 1;
+        for(int i=size-2;i>=0;i--)
+        {
+            postsum[i] = postsum[i+1]*arr[i+1];
+        }
+        
+        vector<int>ans(size);
+        for(int i=0;i<size;i++)
+        {
+            ans[i] = presum[i]*postsum[i];
+        }
+        return ans;
+    }
+};
