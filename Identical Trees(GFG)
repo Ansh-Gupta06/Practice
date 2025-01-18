@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    // Function to check if two trees are identical.
+    bool isIdentical(Node *r1, Node *r2) {
+       
+        // BASE CASE 
+        if(r1 == NULL && r2 == NULL)
+        return true;
+        else if(r1==NULL&&r2!=NULL)
+        return false;
+        else if(r1!=NULL&&r2==NULL)
+        return false;
+        // else return false;  YEH GALAT HAI KYUNKI JAISE HI RECURRSION MEIN JAYEGA
+        //WAISE HI IF CONDITION CHECK HOGI AND THEN ELSE...AGR IF CONDITION 
+        //FALSE HUI TOH ELSE MEIN JAYEGA TOH FALSE RETURN HO JAYEGA
+        //THEREFORE NO LINE WILL BE EXECUTED BENEATH ELSE STATEMENT
+        
+        bool left = isIdentical(r1->left,r2->left);
+        bool right = isIdentical(r1->right,r2->right);
+        bool value = r1->data == r2->data;
+        
+        if(left&&right&&value)
+        return true;
+        return false;
+        
+    }
+};
