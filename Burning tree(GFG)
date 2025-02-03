@@ -1,0 +1,86 @@
+class Solution {
+  public:
+  
+    void mapping(Node* root, int target,map<Node*,Node*> &nodeToparent,Node*& target_node)
+    {
+        queue<Node*> q;
+        q.push(root);
+        nodeToparent[root] = NULL;
+        
+        while(!q.empty())
+        {
+            Node* front = q.front();
+            q.pop();
+            
+            //find node
+            if(front->data==target)
+            {
+                target_node = front;
+            }
+            
+            if(front->left)
+            {
+                nodeToparent[front->left] = front;
+                q.push(front->left);
+            }
+            if(front->right)
+            {
+                nodeToparent[front->right] = front;
+                q.push(front->right);
+            }
+        }
+    }
+    
+    int burntree(Node*root,int target,map<Node*,Node*> &nodeToparent,Node*& target_node)
+    {
+        int time = 0;
+        map<Node*,bool> visit;
+        queue<Node*> q;
+        q.push(target_node);
+        visit[target_node] = true;
+        
+        while(!q.empty())
+        {
+            bool flag = false;
+            int size = q.size();
+            
+            for(int i=0;i<size;i++)
+            {
+                Node* front = q.front();
+                q.pop();
+                
+                if(front->left && !visit[front->left])
+                {
+                    q.push(front->left);
+                    visit[front->left] = true;
+                    flag = true;
+                }
+                if(front->right && !visit[front->right])
+                {
+                    q.push(front->right);
+                    visit[front->right] = true;
+                    flag = true;
+                }
+                if(nodeToparent[front] && !visit[nodeToparent[front]])
+                {
+                    visit[nodeToparent[front]] = true;
+                    q.push(nodeToparent[front]);
+                    flag = true;
+                }
+            }
+            if(flag)
+            time++;
+        }
+        return time;
+        
+        
+    }
+    
+    int minTime(Node* root, int target) {
+        map<Node*,Node*> nodeToparent;
+        Node* target_node = NULL;
+        mapping(root,target,nodeToparent,target_node);
+        return burntree(root,target,nodeToparent,target_node);
+        
+    }
+};
