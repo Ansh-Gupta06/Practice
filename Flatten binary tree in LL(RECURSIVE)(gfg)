@@ -1,0 +1,27 @@
+class Solution
+{
+    public:
+    
+    Node* solve(Node* root)
+    {
+        if(root==NULL)
+        return NULL;
+        
+        Node* lefty = solve(root->left);
+        Node* righty = solve(root->right);
+        root->left = NULL;
+        root->right = lefty;
+        Node* temp = root;
+        while(temp->right!=NULL)
+        {
+            temp = temp->right;
+        }
+        temp->right = righty;
+        return root;
+    }
+    
+    void flatten(Node *root)
+    {
+        root=solve(root);
+    }
+};
