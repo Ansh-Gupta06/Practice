@@ -1,0 +1,25 @@
+int solve(BinaryTreeNode<int>* root, int k,int& i)
+{
+    if(root == NULL)
+    return -1;
+    
+    //L
+    int lefty = solve(root->left,k,i);
+    if(lefty!=-1)
+    return lefty;
+
+    //N
+    i++;
+    if(i==k)
+    {
+        return root->data;
+    }
+    
+    //R
+    int righty = solve(root->right,k,i);
+    return righty;
+}
+int kthSmallest(BinaryTreeNode<int>* root, int k) {
+    int i=0;
+    return solve(root,k,i);
+}
